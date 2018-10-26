@@ -1,0 +1,4 @@
+id: com.mattermost.server-coderunner
+name: Server "Server CodeRunner"
+server:
+    executable: plugin
