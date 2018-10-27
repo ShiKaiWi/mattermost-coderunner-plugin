@@ -22,7 +22,7 @@ sudo usermod -aG docker mattermost
 ```
 And then mattermost server needs restarting.
 
-### build & install plugin
+### Build & Install plugins
 We provides two plugin, server-coderunner-plugin & web-coderunner-plugin, and they should be installed into mattermost both.
 
 You can either download the two plugins on the release page or build them from the source code.
@@ -39,6 +39,6 @@ dep ensure
 sh scripts/build.sh
 ```
 
-Then the two plugins will occur under the  `$GOPATH/src/github.com/ShiKaiWi/mattermost-coderunner-plugin`.
+Then the two plugins (**Targeting on Linux**) will occur under the  `$GOPATH/src/github.com/ShiKaiWi/mattermost-coderunner-plugin`.
 
 And as for how to install the plugin please refer to [install mattermost plugin](https://developers.mattermost.com/extend/plugins/server/hello-world/#installing-the-plugin).
