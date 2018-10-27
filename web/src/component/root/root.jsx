@@ -67,11 +67,11 @@ const getStyle = theme => ({
     backgroundColor: "white"
   },
   pre: {
-    height: "360px",
+    height: "350px",
     overflow: scroll,
     color: "black",
-
-    padding: "10px"
+    padding: "10px",
+    margin: 0
   },
   header: {
     display: "flex",
