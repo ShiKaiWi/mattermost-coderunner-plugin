@@ -1,2 +1,3 @@
 vendor
 *.tar.gz
+.DS_Store
