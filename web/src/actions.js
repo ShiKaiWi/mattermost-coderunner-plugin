@@ -1,6 +1,21 @@
 import { getConfig } from "mattermost-redux/selectors/entities/general"
 import { serverId } from "./manifest"
-import { STATUS_CHANGE } from "./action_types"
+import { OPEN_ROOT_MODAL, CLOSE_ROOT_MODAL } from "./action_types"
+
+export const openRootModal = result => dispatch => {
+  console.log("openRootModal")
+  dispatch({
+    type: OPEN_ROOT_MODAL,
+    data: result
+  })
+}
+
+export const closeRootModal = () => dispatch => {
+  dispatch({
+    type: CLOSE_ROOT_MODAL,
+    data: null
+  })
+}
 
 export const getPluginServerRoute = state => {
   const config = getConfig(state)
@@ -27,7 +42,7 @@ export const codeResult = data => async (dispatch, getState) => {
   })
     .then(res => res.json())
     .then(({ result }) => {
-      result ? alert("Result: " + result) : console.log("codeResult is null")
+      dispatch(openRootModal(result))
     })
     .catch(e => console.log("codeResultFailed...", e))
 }

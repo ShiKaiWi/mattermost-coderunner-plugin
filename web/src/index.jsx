@@ -1,6 +1,7 @@
 import React from "react"
-
 import { codeResult } from "./actions"
+import Root from "./component/root"
+import reducer from "./reducer"
 
 const jsCodeSupport = ["js", "javascript"]
 const goCodeSupport = ["go", "golang"]
@@ -65,6 +66,7 @@ const codeMessageRequest = message => {
 }
 class CodeRunnerPlugin {
   initialize(registry, store) {
+    registry.registerRootComponent(Root)
     registry.registerPostDropdownMenuAction(
       "Run",
       id => {
@@ -76,6 +78,8 @@ class CodeRunnerPlugin {
         return isCodeMessage(ms)
       }
     )
+
+    registry.registerReducer(reducer)
   }
 }
 

@@ -1,17 +1,18 @@
 import { combineReducers } from "redux"
 
-import { STATUS_CHANGE } from "./action_types"
+import { OPEN_ROOT_MODAL, CLOSE_ROOT_MODAL } from "./action_types"
 
-const code = (state = false, action) => {
+const rootModalVisible = (state = false, action) => {
   switch (action.type) {
-    case STATUS_CHANGE:
+    case OPEN_ROOT_MODAL:
       return action.data
-
+    case CLOSE_ROOT_MODAL:
+      return action.data
     default:
       return state
   }
 }
 
 export default combineReducers({
-  code
+  rootModalVisible
 })
