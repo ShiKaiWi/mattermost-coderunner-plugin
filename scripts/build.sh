@@ -8,7 +8,7 @@ tar czf coderunner-plugin.tar.gz plugin plugin.yaml
 rm -rf plugin.yaml plugin
 
 echo "building web-coderunner-plugin..."
-cd web && npm run build && cd -
+cd web && npm install && npm run build && cd -
 WEB_PLUGIN_DIR=com.mattermost.web-coderunner-plugin
 mkdir -p $WEB_PLUGIN_DIR
 cp web/dist/main.js web/plugin.json $WEB_PLUGIN_DIR

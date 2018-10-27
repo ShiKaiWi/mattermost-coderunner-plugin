@@ -1,8 +1,0 @@
-{
-    "id": "com.mattermost.web-coderunner-plugin",
-    "name": "web-coderunner-plugin",
-    "description": "the web plugin collaborate with server coderunner plugin",
-    "webapp": {
-        "bundle_path": "main.js"
-    }
-}

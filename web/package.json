@@ -1,7 +1,7 @@
 {
-  "name": "coderunner-plugin",
+  "name": "web-coderunner-plugin",
   "version": "0.0.1",
-  "description": "coderunner-plugin on the web",
+  "description": "the coderunner plugin for the web",
   "repository": "github.com/ShiKaiWi/mattermost-coderunner-plugin",
   "main": "index.js",
   "scripts": {
@@ -11,14 +11,20 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "acorn": "^6.0.2",
+    "acorn-jsx": "^5.0.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "eslint": "^5.8.0",
     "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "react": "^16.6.0"
+    "mattermost-redux": "^5.4.0",
+    "react": "^16.6.0",
+    "react-redux": "^5.1.0",
+    "redux": "^4.0.1"
   }
 }
