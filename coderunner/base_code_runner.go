@@ -6,7 +6,7 @@ import (
 	"sync/atomic"
 )
 
-const dockerRunScriptTmpl = `docker run -v "%s":/usr/src/coderunner -w /usr/src/coderunner --rm %s %s`
+const dockerRunScriptTmpl = `docker run -m 128m --stop-timeout 120 -v "%s":/usr/src/coderunner -w /usr/src/coderunner --rm %s %s`
 
 type baseCodeRunner struct {
 	id int32
