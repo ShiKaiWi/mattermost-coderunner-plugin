@@ -2,24 +2,24 @@ package coderunner
 
 import (
 	"fmt"
-	"sync/atomic"
+	"os"
 )
 
-const dockerRunScriptTmpl = `docker run -v "%s":/usr/src/coderunner -w /usr/src/coderunner --rm golang go run "%s"`
+const dockerRunGOScriptTmpl = `docker run -v "%s":/usr/src/coderunner -w /usr/src/coderunner --rm golang go run "%s"`
 
 type goCodeRunner struct {
-	id int32
+	idGen
 }
 
 func (r *goCodeRunner) Run(code string) (string, error) {
-	runFileName := fmt.Sprintf("golang_%d.go", atomic.AddInt32(&r.id, 1))
+	runFileName := fmt.Sprintf("golang_%d.go", r.genID())
 	p, err := writeToRunFile(code, runFileName)
 	if err != nil {
 		return "", err
 	}
-	defer removeRunFile(p)
+	defer os.Remove(p)
 
-	script := fmt.Sprintf(dockerRunScriptTmpl, runFileDirectory, runFileName)
+	script := fmt.Sprintf(dockerRunGOScriptTmpl, runFileDirectory, runFileName)
 
 	return runCommand(script)
 }
