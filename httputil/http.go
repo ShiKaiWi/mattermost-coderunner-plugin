@@ -17,6 +17,7 @@ func H405(w http.ResponseWriter) {
 
 // H200 responds with data
 func H200(w http.ResponseWriter, data interface{}) {
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
 	if data == nil {
 		return
