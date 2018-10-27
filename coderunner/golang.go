@@ -1,25 +1,21 @@
 package coderunner
 
-import (
-	"fmt"
-	"os"
+import "fmt"
+
+const (
+	golangImageName = "golang"
 )
 
-const dockerRunGOScriptTmpl = `docker run -v "%s":/usr/src/coderunner -w /usr/src/coderunner --rm golang go run "%s"`
-
 type goCodeRunner struct {
-	idGen
+	baseCodeRunner
 }
 
 func (r *goCodeRunner) Run(code string) (string, error) {
-	runFileName := fmt.Sprintf("golang_%d.go", r.genID())
-	p, err := writeToRunFile(code, runFileName)
-	if err != nil {
-		return "", err
+	nameGen := func(id int32) string {
+		return fmt.Sprintf("golang_%d.go", id)
 	}
-	defer os.Remove(p)
-
-	script := fmt.Sprintf(dockerRunGOScriptTmpl, runFileDirectory, runFileName)
-
-	return runCommand(script)
+	commandGen := func(fileName string) string {
+		return fmt.Sprintf(`go run "%s"`, fileName)
+	}
+	return r.RunCode(golangImageName, code, nameGen, commandGen)
 }

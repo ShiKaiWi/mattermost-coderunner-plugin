@@ -1,25 +1,19 @@
 package coderunner
 
-import (
-	"fmt"
-	"os"
-)
+import "fmt"
 
-const dockerRunNodeScriptTmpl = `docker run -v "%s":/usr/src/coderunner -w /usr/src/coderunner --rm node node "%s"`
+const nodeImageName = "node"
 
 type jsCodeRunner struct {
-	idGen
+	baseCodeRunner
 }
 
 func (r *jsCodeRunner) Run(code string) (string, error) {
-	runFileName := fmt.Sprintf("javascirpt_%d.go", r.genID())
-	p, err := writeToRunFile(code, runFileName)
-	if err != nil {
-		return "", err
+	nameGen := func(id int32) string {
+		return fmt.Sprintf("javascript_%d.js", id)
 	}
-	defer os.Remove(p)
-
-	script := fmt.Sprintf(dockerRunNodeScriptTmpl, runFileDirectory, runFileName)
-
-	return runCommand(script)
+	commandGen := func(fileName string) string {
+		return fmt.Sprintf(`node "%s"`, fileName)
+	}
+	return r.RunCode(nodeImageName, code, nameGen, commandGen)
 }

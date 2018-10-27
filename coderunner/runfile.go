@@ -11,9 +11,16 @@ const (
 	runFileDirectory = "/tmp/mattermost-coderunner-plugin"
 )
 
+// writeToRunFile makes a work directory whose name same as the filename
+// the work directory is returned for clearing by caller
 func writeToRunFile(code, fileName string) (string, error) {
-	p := filepath.Join(runFileDirectory, fileName)
-	return p, ioutil.WriteFile(p, []byte(code), 0666)
+	workDir := filepath.Join(runFileDirectory, fileName)
+	if err := os.MkdirAll(workDir, 0777); err != nil {
+		return "", err
+	}
+
+	p := filepath.Join(workDir, fileName)
+	return workDir, ioutil.WriteFile(p, []byte(code), 0666)
 }
 
 func init() {
