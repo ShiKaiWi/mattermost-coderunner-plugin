@@ -26,6 +26,5 @@ func (r *baseCodeRunner) RunCode(imageName, code string, nameGen func(id int32) 
 
 	script := fmt.Sprintf(dockerRunScriptTmpl, workDir, imageName, commandGen(runFileName))
 
-	fmt.Println("script: ")
 	return runCommand(script)
 }
