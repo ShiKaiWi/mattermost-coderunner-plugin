@@ -2,6 +2,9 @@ import React from "react"
 
 import { codeResult } from "./actions"
 
+const jsCodeSupport = ["js", "javascript"]
+const goCodeSupport = ["go", "golang"]
+
 /**
  * get posts message by postId from state
  * @param {string} postId
@@ -15,7 +18,26 @@ const getMessageById = (postId, state) => {
 }
 
 /**
- * check message is js or go code
+ * check if the message is js code
+ * @param {string} message
+ * @return {boolean}
+ */
+const isJsSupport = message => {
+  const arr = message.split("```")[1].split("\n")
+  return jsCodeSupport.includes(arr[0].trim().toLocaleLowerCase())
+}
+
+/**
+ * check if the message is go code
+ * @param {string} message
+ * @return {boolean}
+ */
+const isGoSupport = message => {
+  const arr = message.split("```")[1].split("\n")
+  return goCodeSupport.includes(arr[0].trim().toLocaleLowerCase())
+}
+
+/**
  * @param {string} message
  * @return {boolean}
  */
@@ -23,12 +45,7 @@ const isCodeMessage = message => {
   if (!message.startsWith("```")) {
     return false
   }
-
-  const arr = message.split("```")[1].split("\n")
-  if (arr[0].includes("js") || arr[0].includes("go")) {
-    return true
-  }
-  return false
+  return isJsSupport(message) || isGoSupport(message)
 }
 
 /**
@@ -39,7 +56,7 @@ const isCodeMessage = message => {
 const codeMessageRequest = message => {
   const nIndex = message.indexOf("\n")
   const msg = message.slice(nIndex).split("```")[0]
-  const isJs = message.slice(0, nIndex).endsWith("js")
+  const isJs = isJsSupport(message)
 
   return {
     code: msg,
