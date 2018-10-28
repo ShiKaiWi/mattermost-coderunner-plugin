@@ -64,10 +64,13 @@ const getStyle = theme => ({
     height: "400px",
     width: "600px",
     color: "white",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    border: "1px",
+    borderColor: "white",
+    borderStyle: "solid"
   },
   pre: {
-    height: "350px",
+    height: "348px",
     overflow: scroll,
     color: "black",
     padding: "10px",
@@ -76,7 +79,7 @@ const getStyle = theme => ({
   header: {
     display: "flex",
     justifyContent: "space-between",
-    backgroundColor: "#1f7bc1",
+    backgroundColor: "rgb(17, 83, 171)",
     color: "white",
     fontSize: "20px",
     padding: "10px"
