@@ -3,6 +3,8 @@ It is a mattermost plugin for running codes in markdown posts.
 
 ## Installation
 ### Prerequisites
+We recommend **CentOS7** as the host os where mattermost run and you should know that the following guide is for it so some difference may exist if you choose some other linux distribution.
+
 [Docker](https://docs.docker.com/install/) is necessary so you have to install it if your mattermost server doesn't have docker.
 
 Then some language docker images needs downloading on mattermost server including:
